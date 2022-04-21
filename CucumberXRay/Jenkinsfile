@@ -7,7 +7,7 @@ pipeline{
         args  '-v /tmp:/tmp'
     	}
 	}
-	def repoURL = 'https://github.com/SerkanGitRepo/CucumberXRay.git'
+		
 	stages{
 		
 		stage("Prepare Workspace") {
@@ -25,26 +25,38 @@ pipeline{
     	}
     	
     	stage('Checkout Self') {
-        	git branch: 'master', credentialsId: '', url: repoURL
+    		steps{
+    			script{
+				    def repoURL = 'https://github.com/SerkanGitRepo/CucumberXRay.git'
+				    git branch: 'master', credentialsId: '', url: repoURL
+				}	
+    		}
+
+        	
     	}
     	
     	stage('Cucumber Tests') {
-	        withMaven(maven: 'maven381') {
+    		steps{
+    		    withMaven(maven: 'maven381') {
 	            sh """
 				cd ${env.WORKSPACE_LOCAL}
 				mvn clean test -e
-			"""
-	        }
+				"""
+		        }
+    		}
     	}
     	
     	stage('Expose report') {
-        	archive "**/cucumber.json"
-        	cucumber '**/cucumber.json'
+    		steps{
+    		    archive "**/cucumber.json"
+        		cucumber '**/cucumber.json'
+    		}
     	}
 	    
 	    stage('Import results to Xray') {
-
-			def description = "[BUILD_URL|${env.BUILD_URL}]"
+	    	steps{
+	    	    script{
+	    	        def description = "[BUILD_URL|${env.BUILD_URL}]"
 			def labels = '["regression","automated_regression"]'
 			def environment = "DEV"
 			def testExecutionFieldId = 10602
@@ -71,6 +83,10 @@ pipeline{
 			echo info
 	
 			step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId])
+	    	    }
+
+	    	}
+			
 		}
 	    
 	}
