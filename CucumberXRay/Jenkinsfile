@@ -1,12 +1,12 @@
 pipeline{
-    agent
-	{
+    agent any
+	//{
 	//	docker {
      //   image 'maven:3.8.1-adoptopenjdk-11'
      //   label 'maven381'
      //   args  '-v /tmp:/tmp'
     //	}
-	}
+	//}
 		
 	stages{
 		
