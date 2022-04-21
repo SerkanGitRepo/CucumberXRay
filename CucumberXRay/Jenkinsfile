@@ -37,7 +37,7 @@ pipeline{
     	
     	stage('Cucumber Tests') {
     		steps{
-    		    withMaven(maven: 'Apache Maven 3.6.3') {
+    		    withMaven(maven: 'maven363') {
 	            sh """
 				cd ${env.WORKSPACE_LOCAL}
 				mvn clean test -e
