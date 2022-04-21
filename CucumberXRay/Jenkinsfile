@@ -40,7 +40,7 @@ pipeline{
     		    withMaven(maven: 'maven363') {
 	            sh """
 				cd ${env.WORKSPACE_LOCAL}/CucumberXRay
-				mvn clean test
+				mvn clean test -Dcucumber.options="src/test/resources/features/basicScenario.feature"
 				"""
 		        }
     		}
