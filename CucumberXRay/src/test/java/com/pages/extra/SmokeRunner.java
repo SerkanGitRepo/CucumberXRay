@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 		plugin = {"pretty","json:target/site/results.json"},
 		tags = {"@smoke"},
-		features = { "src/test/resources/com/mycompany/app/" },
-		glue = { "com.mycompany.app"}
+		features = { "src/test/resources/features/" },
+		glue = { "com.pages"}
 		)
 public class SmokeRunner {
 

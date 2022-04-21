@@ -40,7 +40,7 @@ pipeline{
     		    withMaven(maven: 'maven363') {
 	            sh """
 				cd ${env.WORKSPACE_LOCAL}/CucumberXRay
-				mvn clean test -e
+				mvn clean test
 				"""
 		        }
     		}
