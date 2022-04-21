@@ -1,3 +1,10 @@
+agent
+{
+docker {
+        image 'maven:3.8.1-adoptopenjdk-11'
+        label 'maven381'
+        args  '-v /tmp:/tmp'
+    }
 node() 
 {
     agent { docker { image 'maven:3.8.4-openjdk-11-slim' }}
@@ -15,7 +22,7 @@ node()
         git branch: 'master', credentialsId: '', url: repoURL
     }
     stage('Cucumber Tests') {
-        withMaven(maven: 'maven-latest') {
+        withMaven(maven: 'maven381') {
             sh """
 			cd ${env.WORKSPACE_LOCAL}
 			mvn clean test -e
@@ -56,4 +63,5 @@ node()
 
 			step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId])
 		}
+}
 }
