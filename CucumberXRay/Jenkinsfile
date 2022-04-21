@@ -71,7 +71,7 @@ pipeline{
 					"labels":''' + labels + ''',
 					"description":"''' + description + '''",
 					"summary": "Automated Regression Execution @ ''' + env.BUILD_TIME + ' ' + environment + ''' " ,
-					"duedate": "01/01/2023"
+					"duedate": "2023-01-01",
 					"issuetype": {
 					"id": "''' + testExecutionFieldId + '''"
 					},
