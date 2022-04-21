@@ -1,12 +1,12 @@
 pipeline{
-    agent
-	{
-		docker {
-        image 'maven:3.8.1-adoptopenjdk-11'
-        label 'maven381'
-        args  '-v /tmp:/tmp'
-    	}
-	}
+    //agent
+	//{
+	//	docker {
+     //   image 'maven:3.8.1-adoptopenjdk-11'
+     //   label 'maven381'
+     //   args  '-v /tmp:/tmp'
+    //	}
+	//}
 		
 	stages{
 		
@@ -37,7 +37,7 @@ pipeline{
     	
     	stage('Cucumber Tests') {
     		steps{
-    		    withMaven(maven: 'maven381') {
+    		    withMaven(maven: 'Apache Maven 3.6.3') {
 	            sh """
 				cd ${env.WORKSPACE_LOCAL}
 				mvn clean test -e
