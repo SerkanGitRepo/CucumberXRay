@@ -82,7 +82,7 @@ pipeline{
 	
 			echo info
 	
-			step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId])
+			step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importFilePath: 'CucumberXRay/target/cucumber.json', importInfo: info, inputInfoSwitcher: 'fileContent', serverInstance: xrayConnectorId])
 	    	    }
 
 	    	}
